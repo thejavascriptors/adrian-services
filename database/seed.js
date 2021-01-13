@@ -43,7 +43,7 @@ const sampleReviews = [
 
 const insertReviews = function () {
   Review.create(sampleReviews)
-   .then(()=> console.log('Created.'));
+   .then(()=> console.log('Created'));
 }
 
 
