@@ -3,6 +3,20 @@ const app = express();
 const PORT = 3000;
 const Reviews = require('../database/Review.js')
 
+
+
+app.use(express.static('public'));
+
+
+
+
+app.get('/', (req,res) => {
+
+ console.log('Request recieved.')
+
+})
+
+
 app.get('/reviews', async (req, res) => {
   console.log('POST request recieved.')
 
@@ -11,9 +25,7 @@ app.get('/reviews', async (req, res) => {
   res.send(data);
 
 
-
-
-})
+});
 
 
 app.listen(PORT, () => {
