@@ -10,7 +10,7 @@ for (let i = 0; i <= 100; i++) {
     username: faker.name.findName(),
     title: faker.name.title(),
     review: faker.commerce.productDescription(),
-    stars: Math.floor(Math.random() * 1000),
+    stars: Math.floor(Math.random() * 6),
     foundHelpful: Math.floor(Math.random() * 1000)
   })
 }
