@@ -1,6 +1,6 @@
 import React from 'react'
 import Axios from 'axios';
-
+import Review from './review.jsx';
 
 
 
@@ -38,7 +38,14 @@ class App extends React.Component  {
 
   render () {
     return (
-     <h1>Running React</h1>
+      <div>
+        <div className = 'reviewComp'>
+          <h1 className = 'amazonText'>Customer images</h1>
+          <h1 className = 'amazonText'>Read Reviews that metion</h1>
+     <h1 className = 'amazonText'>Top reviews from the United States.</h1>
+     <Review/>
+     </div>
+     </div>
     )
   }
 
