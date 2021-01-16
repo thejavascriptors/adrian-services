@@ -34,6 +34,24 @@
   height: 1.5rem;
 }
 
+
+.globalStarResize {
+ position: relative;
+ width: 10rem;
+ top: -1rem;
+ height: 2rem;
+}
+
+.globalRating {
+  position: relative;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 300;
+  color: #565959;
+  top: -1.8rem;
+  left: 0.2rem;
+  font-size: 15px;
+}
+
 .userImg {
   position: relative;
   left: -9rem;
@@ -46,6 +64,61 @@
   font-weight: 300;
 }
 
+
+
+.starComp {
+  position: relative;
+  left: -25rem;
+  top: 10rem;
+}
+
+
+
+.customerRev {
+
+  font-family: 'roboto', sans-serif;
+  font-size: 30px;
+  font-weight: 500;
+}
+
+
+
+.mentionBlock {
+  font-family :'Roboto', sans-serif;
+  font-size: 15px;
+  display: inline-block;
+  font-weight:300;
+  height: 2rem;
+  opacity: 0.9;
+  padding: 0px 14px;
+  line-height: 29px;
+  color: #111111;
+  border-bottom: solid 1px #969696;
+  background-color: #D7E8EA;
+  margin: 0px 10px 14px 0px;
+  cursor: grab;
+}
+
+
+.amazonMore {
+  font-family: 'Roboto', sans-serif;
+  font-size: 15px;
+  font-weight: 500;
+  color: #007185;
+}
+
+
+.amazonMentions {
+  display: flex;
+  flex-flow: row wrap;
+  width: 49rem;
+}
+.imageFormat {
+  display: flex;
+  flex-flow: row wrap;
+  width: 60rem;
+
+}
 
 
 .amazonUser {
