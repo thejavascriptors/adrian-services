@@ -1,18 +1,8 @@
-.amazonText {
-  font-family: 'Roboto', sans-serif;
-  font-size: 20px;
-}
+
 .reviewComp {
   position: relative;
   left: 30rem;
   top: 10rem;
-}
-.amazonTitle {
-  position: relative;
-  top: 0.3rem;
-  left: 10rem;
-  font-family: 'Roboto', sans-serif;
-  font-size: 15px;
 }
 
 
@@ -58,11 +48,7 @@
   border-radius: 50%;
 }
 
-.amazonReview {
-  font-family: 'Roboto', sans-serif;
-  font-size: 20px;
-  font-weight: 300;
-}
+
 
 
 
@@ -113,22 +99,8 @@
   flex-flow: row wrap;
   width: 49rem;
 }
-.imageFormat {
-  display: flex;
-  flex-flow: row wrap;
-  width: 60rem;
-
-}
 
 
-.amazonUser {
-  position: relative;
-  font-family: 'Roboto', sans-serif;
-  font-size: 20px;
-  font-weight: 300;
-  top: 3.5rem;
-  left: 3.5rem;
-}
 
 .amazonButton {
 
@@ -137,9 +109,6 @@
 
 }
 
-.balanceReview {
-  width: 40rem;
-}
 
 
 .amazonHelpful {
