@@ -11,7 +11,8 @@
     "seed": "node database/seed.js",
     "dev": "webpack -d --watch",
     "start": "nodemon ./server/server.js",
-    "test": "mocha"
+    "test": "mocha",
+    "delete": "node database/deleteData.js"
   },
   "dependencies": {
     "axios": "^0.21.1",
