@@ -18,8 +18,9 @@ const Container = styled.div`
 
 position: relative;
 left: -25rem;
-top: 64rem;
+top: 68rem;
 border-bottom: 2px solid #e7e7e7;
+width: 20rem;
 
 `
 
@@ -29,7 +30,14 @@ const TextStyle = styled.h1`
 position: relative;
 font-family: 'Roboto', sans-serif;
 font-size: 15px;
-font-weight 300
+font-weight 300;
+
+`
+
+
+const buttonAmazon = styled.button`
+position: relative;
+width: 100%;
 
 `
 
@@ -41,6 +49,7 @@ function WriteReview () {
     <div>
       <Container>
      <ReviewText>Review this product.</ReviewText>
+     <button className = 'btn-config'> Write a customer review</button>
       <TextStyle>Share your thoughts with other customers</TextStyle>
       </Container>
 

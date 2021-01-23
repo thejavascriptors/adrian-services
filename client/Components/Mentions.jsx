@@ -52,6 +52,7 @@ function Mentions(props) {
          <h1 className='mentionBlock' onClick={() => props.changeReview('computer')}>computer</h1>
          <h1 className='mentionBlock' onClick={() => props.changeReview('expensive controller')}>expensive controller</h1>
          <h1 className='mentionBlock' onClick={() => props.changeReview('bad battery')}>bad battery</h1>
+         <h1 className='mentionBlock' onClick={() => props.changeReview('')}>All</h1>
       </AmazonMentions>
    )
 

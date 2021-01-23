@@ -20,7 +20,7 @@ const StarComp = styled.div`
 
 position: relative;
 left: -25rem;
-top: 29.2rem;
+top: 26.5rem;
 width: 20rem;
 border-bottom: 2px solid #e7e7e7;
 
@@ -37,6 +37,23 @@ font-size: 20px;
 
 
 
+const Pagination = styled.div`
+  display: inline-block;
+`
+
+const InsideDiv = styled.div`
+color: black;
+float: left;
+padding: 8px 16px;
+text-decoration: none
+
+
+`
+
+
+
+
+
 class App extends React.Component {
 
   constructor(props) {
@@ -44,31 +61,19 @@ class App extends React.Component {
     this.state = {
       reviews: [],
       showingReviews: [],
-      metionedReview: ''
+      metionedReview: '',
+      paginatedArray: []
+
     }
   }
 
+  // Nested arrays for pagination
+  // Nest 5 reviews into a array.
 
 
-
-  addFiveMore() {
-    let newReviews = this.state.reviews
-    let fiveReviews = this.state.reviews.splice(0, 5)
-    let shoppingReview = this.state.showingReviews
-    for (let i = 0; i < fiveReviews.length; i++) {
-      shoppingReview.push(fiveReviews[i])
-    }
-
-    console.log(shoppingReview)
-    this.setState({
-      reviews: newReviews,
-      showingReviews: shoppingReview
-    })
-  }
 
 
   changeMetionedReview(query) {
-    console.log('the state has changed.')
     this.setState({
       metionedReview: query
     }
@@ -84,23 +89,52 @@ class App extends React.Component {
         showingReviews: this.state.reviews.splice(0, 5)
       })
 
+      let paginatedArrays = []
+      let currentArray = [];
+      for (let i = 0; i < this.state.reviews.length; i++) {
+
+        if (i % 5 === 0) {
+          paginatedArrays.push(currentArray)
+          currentArray = [];
+        }
+        currentArray.push(this.state.reviews[i])
+
+      }
+
+      this.setState({
+        paginatedArray: paginatedArrays
+      })
+      console.log(paginatedArrays, 'test')
     })
 
     // Get 5 reviews by splicing.
     // Everytime load more is called slice from the array and push it into the showing array.
+    // render pages by how many nested arrays are in the nested array.
+    // make a variable that tracks what page is clicked
+
 
   }
 
+
+  changePage(val) {
+
+    console.log(this.state.paginatedArray, 'test', val)
+    this.setState({
+      showingReviews: this.state.paginatedArray[val]
+    })
+  }
 
 
 
   render() {
 
     let doesInclude = this.state.metionedReview
+    let pagNum = 0;
+    let currNum = 0;
     return (
       <div>
         <ReviewComp>
-          <WriteReview/>
+          <WriteReview />
           <StarComp>
             <Star props={this.state.reviews} />
           </StarComp>
@@ -119,8 +153,22 @@ class App extends React.Component {
             return item.review.includes(doesInclude) ? <Review props={item} /> : null
           })
           }
-          <button onClick={this.addFiveMore.bind(this)}>Load more</button>
         </ReviewComp>
+        <Pagination>
+          {this.state.paginatedArray.map(item => {
+            if (currNum === 0) {
+              pagNum = 0
+            } else {
+              pagNum++;
+            }
+            currNum++;
+            let AssignedVariable = pagNum
+            return <h1 className='pagNum' onClick={() => this.changePage(AssignedVariable)}>{pagNum}</h1>
+            // onclick we change the showing to the paginated array clicked.
+          })
+
+          }
+        </Pagination>
       </div>
     )
   }
