@@ -30,11 +30,19 @@
   height: 1.5rem;
 }
 
+.pagNum:hover {
+  text-decoration: underline;
+
+
+}
+
 
 .pagNum {
+  position: relative;
 color: #007185;
 font-family: 'Roboto', sans-serif;
 float: left;
+font-size: 15px;
 padding: 8px 16px;
 text-decoration: none;
 cursor: grab;

@@ -101,7 +101,7 @@ function Review(props) {
          <BalanceReview>
             <AmazonReview>{props.props.review}</AmazonReview>
          </BalanceReview>
-         <AmazonHelpful>{props.props.stars} found this helpful.</AmazonHelpful>
+         <AmazonHelpful>{props.props.foundHelpful} found this helpful.</AmazonHelpful>
          <AmazonButton>Helpful</AmazonButton>
          <AmazonAbuse>| Report abuse</AmazonAbuse>
       </div>

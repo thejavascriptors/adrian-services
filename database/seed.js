@@ -3,6 +3,7 @@ const Review = require('./Review.js')
 const faker = require('faker')
 
 const sampleReviews = [
+
   {
     username: 'I like trains',
     title: 'Im sure ill like it when i get the ps5.',
@@ -10,6 +11,15 @@ const sampleReviews = [
     stars: 2,
     foundHelpful: 680
   },
+
+  {
+    username: 'John Master',
+    title: 'No cable',
+    review: `I bought this controller to use with my pc because I really wanted to try it and plus I recently had shoulder surgery and can’t use my keyboard and mouse. Now the controller itself is amazing but I paid $70 for this controller.`,
+    stars: 1,
+    foundHelpful:999
+  },
+
   {
     username: 'SaviorX',
     title: 'Possibly my favorite controller of all time.',
@@ -142,6 +152,13 @@ const sampleReviews = [
     stars: 1,
     foundHelpful: 4
   },
+  {
+    username: 'John Master',
+    title: 'No cable',
+    review: `I bought this controller to use with my pc because I really wanted to try it and plus I recently had shoulder surgery and can’t use my keyboard and mouse. Now the controller itself is amazing but I paid $70 for this controller.`,
+    stars: 1,
+    foundHelpful: 4
+  }
 
 
 ]

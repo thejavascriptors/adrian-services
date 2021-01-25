@@ -38,8 +38,11 @@ font-size: 20px;
 
 
 const Pagination = styled.div`
+  position: relative;
   display: inline-block;
-`
+  top: 10rem;
+  left: 30rem;
+  `
 
 const InsideDiv = styled.div`
 color: black;
@@ -62,14 +65,14 @@ class App extends React.Component {
       reviews: [],
       showingReviews: [],
       metionedReview: '',
-      paginatedArray: []
+      paginatedArray: [],
+      currentSelector: 'top'
 
     }
   }
 
   // Nested arrays for pagination
   // Nest 5 reviews into a array.
-
 
 
 
@@ -82,12 +85,17 @@ class App extends React.Component {
 
   componentDidMount() {
     Axios('http://localhost:3000/reviews').then(reviews => {
+      if (this.state.currentSelector === 'top') {
+        reviews.data.sort((a, b) => {
+          return a.foundHelpful - b.foundHelpful
+        });
+        reviews.data.reverse()
+      }
+
       this.setState({
         reviews: reviews.data
       })
-      this.setState({
-        showingReviews: this.state.reviews.splice(0, 5)
-      })
+
 
       let paginatedArrays = []
       let currentArray = [];
@@ -100,6 +108,9 @@ class App extends React.Component {
         currentArray.push(this.state.reviews[i])
 
       }
+      this.setState({
+        showingReviews: paginatedArrays[1]
+      })
 
       this.setState({
         paginatedArray: paginatedArrays
@@ -118,10 +129,19 @@ class App extends React.Component {
 
   changePage(val) {
 
-    console.log(this.state.paginatedArray, 'test', val)
     this.setState({
       showingReviews: this.state.paginatedArray[val]
     })
+  }
+
+  changeValue(e) {
+    console.log(e.target.value, 'FROM CHANGE VALUE');
+    this.setState({
+      currentSelector: e.target.value
+    })
+    this.componentDidMount();
+
+
   }
 
 
@@ -143,13 +163,12 @@ class App extends React.Component {
           <h1 className='amazonMore'>See all customer images</h1>
           <AmazonText>Read Reviews that mention</AmazonText>
           <Mentions changeReview={this.changeMetionedReview.bind(this)} />
-          <select name="cars" id="cars">
-            <option value="volvo">Top reviews</option>
-            <option value="saab">Most recent</option>
+          <select name="cars" id="cars" onChange={this.changeValue.bind(this)}>
+            <option value="top">Top reviews</option>
+            <option value='timed'>Most recent</option>
           </select>
           <AmazonText>Top reviews from the United States.</AmazonText>
           {this.state.showingReviews.map(item => {
-            console.log(item.review)
             return item.review.includes(doesInclude) ? <Review props={item} /> : null
           })
           }
@@ -163,7 +182,7 @@ class App extends React.Component {
             }
             currNum++;
             let AssignedVariable = pagNum
-            return <h1 className='pagNum' onClick={() => this.changePage(AssignedVariable)}>{pagNum}</h1>
+            return pagNum !== 0 ? <h1 className='pagNum' onClick={() => this.changePage(AssignedVariable)}>{pagNum}</h1> : null
             // onclick we change the showing to the paginated array clicked.
           })
 
