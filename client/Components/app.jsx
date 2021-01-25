@@ -75,15 +75,6 @@ class App extends React.Component {
   // Nest 5 reviews into a array.
 
 
-  componentDidUpdate () {
-
-   let newArr = this.state.reviews.sort( (a,b) => {
-       return a.createdAt -b.createdAt
-    })
-
-
-
-}
 
   changeMetionedReview(query) {
     this.setState({
@@ -96,13 +87,10 @@ class App extends React.Component {
     Axios('http://localhost:3000/reviews').then(reviews => {
       if (this.state.currentSelector === 'top') {
       reviews.data.sort( (a,b) => {
-        console.log(a.foundHelpful)
         return a.foundHelpful - b.foundHelpful
       });
        reviews.data.reverse()
-       console.log(reviews.data, 'test')
       }
-          console.log('component did mount ran!')
 
       this.setState({
         reviews: reviews.data
@@ -141,7 +129,6 @@ class App extends React.Component {
 
   changePage(val) {
 
-    console.log(this.state.paginatedArray, 'test', val)
     this.setState({
       showingReviews: this.state.paginatedArray[val]
     })
