@@ -1,6 +1,6 @@
 # Project Name
 
-> Project description
+> Review Model
 
 ## Related Projects
 
@@ -18,6 +18,12 @@
 ## Usage
 
 > Some usage instructions
+npm install - installs dependencies 
+
+npm run start- starts up the server
+npm run dev- starts up webpack
+npm run seed- seeds database
+npm run delete - deletes database
 
 ## Requirements
 

@@ -33,7 +33,6 @@ function Mentions(props) {
 
 
    return (
-
       <AmazonMentions>
          <h1 className='mentionBlock' onClick={() => props.changeReview('next gen')}>next gen</h1>
          <h1 className='mentionBlock' onClick={() => props.changeReview('haptic feedback')}>haptic feedback</h1>
