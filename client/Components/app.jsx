@@ -86,10 +86,10 @@ class App extends React.Component {
   componentDidMount() {
     Axios('http://localhost:3000/reviews').then(reviews => {
       if (this.state.currentSelector === 'top') {
-      reviews.data.sort( (a,b) => {
-        return a.foundHelpful - b.foundHelpful
-      });
-       reviews.data.reverse()
+        reviews.data.sort((a, b) => {
+          return a.foundHelpful - b.foundHelpful
+        });
+        reviews.data.reverse()
       }
 
       this.setState({
@@ -134,7 +134,7 @@ class App extends React.Component {
     })
   }
 
-  changeValue (e) {
+  changeValue(e) {
     console.log(e.target.value, 'FROM CHANGE VALUE');
     this.setState({
       currentSelector: e.target.value
@@ -163,7 +163,7 @@ class App extends React.Component {
           <h1 className='amazonMore'>See all customer images</h1>
           <AmazonText>Read Reviews that mention</AmazonText>
           <Mentions changeReview={this.changeMetionedReview.bind(this)} />
-          <select name="cars" id="cars" onChange = {this.changeValue.bind(this)}>
+          <select name="cars" id="cars" onChange={this.changeValue.bind(this)}>
             <option value="top">Top reviews</option>
             <option value='timed'>Most recent</option>
           </select>
@@ -182,7 +182,7 @@ class App extends React.Component {
             }
             currNum++;
             let AssignedVariable = pagNum
-            return <h1 className='pagNum' onClick={() => this.changePage(AssignedVariable)}>{pagNum}</h1>
+            return pagNum !== 0 ? <h1 className='pagNum' onClick={() => this.changePage(AssignedVariable)}>{pagNum}</h1> : null
             // onclick we change the showing to the paginated array clicked.
           })
 
