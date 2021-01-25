@@ -111,7 +111,7 @@ class App extends React.Component {
 
       }
 
-      if (currentArray !== 0) {
+      if (currentArray.length !== 0) {
         paginatedArrays.push(currentArray)
       }
       this.setState({
