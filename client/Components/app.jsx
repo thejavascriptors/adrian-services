@@ -97,16 +97,22 @@ class App extends React.Component {
       })
 
 
+
+
       let paginatedArrays = []
       let currentArray = [];
       for (let i = 0; i < this.state.reviews.length; i++) {
 
-        if (i % 5 === 0) {
+        if (currentArray.length >= 4) {
           paginatedArrays.push(currentArray)
           currentArray = [];
         }
         currentArray.push(this.state.reviews[i])
 
+      }
+
+      if (currentArray !== 0) {
+        paginatedArrays.push(currentArray)
       }
       this.setState({
         showingReviews: paginatedArrays[1]
@@ -133,6 +139,12 @@ class App extends React.Component {
       showingReviews: this.state.paginatedArray[val]
     })
   }
+
+
+
+
+
+
 
   changeValue(e) {
     console.log(e.target.value, 'FROM CHANGE VALUE');
