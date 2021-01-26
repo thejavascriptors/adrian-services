@@ -85,7 +85,7 @@ height: 1.5rem;
 `
 
 function Review(props) {
-   let currentStar = 'star.png'
+   let starImage = 'star.png'
 
    switch (props.props.stars) {
       case 1:
@@ -98,10 +98,10 @@ function Review(props) {
           starImage = 'https://badgersnax.s3-us-west-2.amazonaws.com/hrr50-fec/AdrianPhotos/3rating.png'
         break;
         case 4:
-          starImage = 'https://badgersnax.s3-us-west-2.amazonaws.com/hrr50-fec/AdrianPhotos/5rating.png'
+          starImage = 'https://badgersnax.s3-us-west-2.amazonaws.com/hrr50-fec/AdrianPhotos/4rating.png'
         break;
         case 5:
-          starImage = 'https://badgersnax.s3-us-west-2.amazonaws.com/hrr50-fec/AdrianPhotos/boxback.jpg'
+          starImage = 'https://badgersnax.s3-us-west-2.amazonaws.com/hrr50-fec/AdrianPhotos/5rating.png'
         break;
    }
 
@@ -111,7 +111,7 @@ function Review(props) {
    return (
       <div>
          <AmazonUser>{props.props.username}</AmazonUser>
-         <StarResize src={currentStar}></StarResize>
+         <StarResize src={starImage}></StarResize>
          <UserImg src='https://badgersnax.s3-us-west-2.amazonaws.com/hrr50-fec/AdrianPhotos/ninja.jpg'></UserImg>
          <AmazonTitle>{props.props.title}</AmazonTitle>
          <AmazonHelpful>Reviewed in the United States on {moment(props.props.createdAt).format('MMMM do YYYY')}</AmazonHelpful>

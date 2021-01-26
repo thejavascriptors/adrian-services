@@ -62,6 +62,19 @@ color: #007185;
 
 `
 
+const PagNum = styled.h1`
+
+position: relative;
+color: #007185;
+font-family: 'Roboto', sans-serif;
+float: left;
+font-size: 15px;
+padding: 8px 16px;
+text-decoration: none;
+cursor: grab;
+
+`
+
 
 
 class App extends React.Component {
@@ -202,7 +215,7 @@ class App extends React.Component {
             }
             currNum++;
             let AssignedVariable = pagNum
-            return pagNum !== 0 ? <h1 className='pagNum' onClick={() => this.changePage(AssignedVariable)}>{pagNum}</h1> : null
+            return pagNum !== 0 ? <PagNum onClick={() => this.changePage(AssignedVariable)}>{pagNum}</PagNum> : null
             // onclick we change the showing to the paginated array clicked.
           })
 
