@@ -35,7 +35,7 @@ font-weight 300;
 `
 
 
-const buttonAmazon = styled.button`
+const ButtonAmazon = styled.button`
 position: relative;
 width: 100%;
 
@@ -49,7 +49,7 @@ function WriteReview () {
     <div>
       <Container>
      <ReviewText>Review this product.</ReviewText>
-     <button className = 'btn-config'> Write a customer review</button>
+     <ButtonAmazon> Write a customer review</ButtonAmazon>
       <TextStyle>Share your thoughts with other customers</TextStyle>
       </Container>
 

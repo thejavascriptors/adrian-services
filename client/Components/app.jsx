@@ -53,7 +53,14 @@ text-decoration: none
 
 `
 
+const AmazonMore = styled.h1`
 
+font-family: 'Roboto', sans-serif;
+font-size: 15px;
+font-weight: 500;
+color: #007185;
+
+`
 
 
 
@@ -77,6 +84,7 @@ class App extends React.Component {
 
 
   changeMetionedReview(query) {
+    console.log('clicked')
     this.setState({
       metionedReview: query
     }
@@ -172,7 +180,7 @@ class App extends React.Component {
           </StarComp>
           <AmazonText>Customer images</AmazonText>
           <Images />
-          <h1 className='amazonMore'>See all customer images</h1>
+          <AmazonMore>See all customer images</AmazonMore>
           <AmazonText>Read Reviews that mention</AmazonText>
           <Mentions changeReview={this.changeMetionedReview.bind(this)} />
           <select name="cars" id="cars" onChange={this.changeValue.bind(this)}>

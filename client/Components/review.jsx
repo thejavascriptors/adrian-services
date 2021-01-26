@@ -65,27 +65,44 @@ height: 2.5rem;
 
 `
 
+const UserImg = styled.img`
 
+position: relative;
+left: -9rem;
+border-radius: 50%;
+
+`
+
+
+
+const StarResize = styled.img`
+
+position: relative;
+width: 9rem;
+top: 2rem;
+height: 1.5rem;
+
+`
 
 function Review(props) {
    let currentStar = 'star.png'
 
    switch (props.props.stars) {
       case 1:
-         currentStar = 'star.png'
-         break;
-      case 2:
-         currentStar = 'star2.png'
-         break;
-      case 3:
-         currentStar = 'star3.png'
-         break;
-      case 4:
-         currentStar = 'star4.png'
-         break;
-      case 5:
-         currentStar = 'star5.png'
-         break;
+         starImage = 'https://badgersnax.s3-us-west-2.amazonaws.com/hrr50-fec/AdrianPhotos/1rating.png'
+        break;
+        case 2:
+          starImage = 'https://badgersnax.s3-us-west-2.amazonaws.com/hrr50-fec/AdrianPhotos/2rating.png'
+        break;
+        case 3:
+          starImage = 'https://badgersnax.s3-us-west-2.amazonaws.com/hrr50-fec/AdrianPhotos/3rating.png'
+        break;
+        case 4:
+          starImage = 'https://badgersnax.s3-us-west-2.amazonaws.com/hrr50-fec/AdrianPhotos/5rating.png'
+        break;
+        case 5:
+          starImage = 'https://badgersnax.s3-us-west-2.amazonaws.com/hrr50-fec/AdrianPhotos/boxback.jpg'
+        break;
    }
 
 
@@ -94,8 +111,8 @@ function Review(props) {
    return (
       <div>
          <AmazonUser>{props.props.username}</AmazonUser>
-         <img src={currentStar} className='starResize'></img>
-         <img src='logo.jpg' className='userImg'></img>
+         <StarResize src={currentStar}></StarResize>
+         <UserImg src='https://badgersnax.s3-us-west-2.amazonaws.com/hrr50-fec/AdrianPhotos/ninja.jpg'></UserImg>
          <AmazonTitle>{props.props.title}</AmazonTitle>
          <AmazonHelpful>Reviewed in the United States on {moment(props.props.createdAt).format('MMMM do YYYY')}</AmazonHelpful>
          <BalanceReview>
