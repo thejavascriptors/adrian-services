@@ -8,7 +8,10 @@ import styled from 'styled-components'
 import WriteReview from './WriteReview.jsx'
 
 
+ const MainDiv = styled.div`
+  overflow-y: hidden;
 
+ `
 const ReviewComp = styled.div`
 
 display: flex;
@@ -16,7 +19,10 @@ flex-direction: row;
   align-items: flex-start;
   flex-wrap: wrap;
   justify-content: space-evenly;
-
+  -webkit-transform:scale(0.8);
+  -moz-transform:scale(0.5);
+-ms-transform:scale(0.5);
+transform:scale(0.8);
 `
 
 const StarComp = styled.div`
@@ -202,7 +208,7 @@ class App extends React.Component {
     let pagNum = 0;
     let currNum = 0;
     return (
-      <div>
+      <MainDiv>
         <ReviewComp>
 
 
@@ -251,7 +257,7 @@ class App extends React.Component {
           </TestComp>
         </ReviewComp>
 
-      </div>
+      </MainDiv>
     )
   }
 

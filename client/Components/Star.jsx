@@ -10,6 +10,7 @@ box-shadow: inset 0 0 0 1px #E3E6E6;
 margin: 1px 0px -50px 0px;
 position: relative;
 left: 2rem;
+
 `
 
 
@@ -271,7 +272,7 @@ class Star extends React.Component {
 
     let starAvg = (5 * star5 + 4 * star4 + 3 *star3 + 2 *star2 + 1 * star1) / (star5 + star4 + star3 + star2 + star1)
 
-    document.querySelector('.sc-iqHYGH').innerHTML = starAvg.toFixed(2);
+    document.querySelector('.totalScore').innerHTML = starAvg.toFixed(2) + ' out of 5';
 
 
      this.setState({
@@ -319,7 +320,7 @@ class Star extends React.Component {
       <div>
         <CustomerRev>Customer reviews</CustomerRev>
         <GlobalStarResize src={starImage}></GlobalStarResize>
-        <OutOf>4.9 out of 5</OutOf>
+        <OutOf className = 'totalScore'>4.9 out of 5</OutOf>
         <GlobalRating>{this.state.reviews.length} global ratings</GlobalRating>
         <BackgroundBar>
           <Bar className = 'star5_percent'></Bar>
