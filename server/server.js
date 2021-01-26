@@ -3,7 +3,7 @@ const app = express();
 const PORT = 3000;
 const Reviews = require('../database/Review.js')
 const cors = require('cors')
-
+const path = require('path')
 app.use(cors());
 app.use(express.static('public'));
 
