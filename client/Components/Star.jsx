@@ -165,6 +165,41 @@ const Caret = styled.p`
   transform: rotate(-90deg);
 `;
 
+
+const CustomerRev =  styled.h1`
+
+position: relative;
+top: 4rem;
+font-family: 'roboto', sans-serif;
+font-size: 30px;
+font-weight: 500;
+
+`
+
+
+const GlobalRating = styled.h1`
+position: relative;
+font-family: 'Roboto', sans-serif;
+font-weight: 300;
+color: #565959;
+top: -1rem;
+left: 0rem;
+font-size: 15px;
+
+`
+
+
+
+const GlobalStarResize = styled.img`
+
+position: relative;
+width: 10rem;
+top: 3rem;
+left: -0.3rem;
+height: 2rem;
+
+`
+
 class Star extends React.Component {
 
 
@@ -259,33 +294,33 @@ class Star extends React.Component {
 
 
   render() {
-   let starImage = 'star.png'
+   let starImage = 'https://badgersnax.s3-us-west-2.amazonaws.com/hrr50-fec/AdrianPhotos/1rating.png'
 
    switch (Math.floor(this.state.starRating)) {
      case 1:
-      starImage = 'star.png'
+      starImage = 'https://badgersnax.s3-us-west-2.amazonaws.com/hrr50-fec/AdrianPhotos/1rating.png'
      break;
      case 2:
-       starImage = 'star2.png'
+       starImage = 'https://badgersnax.s3-us-west-2.amazonaws.com/hrr50-fec/AdrianPhotos/2rating.png'
      break;
      case 3:
-       starImage = 'star3.png'
+       starImage = 'https://badgersnax.s3-us-west-2.amazonaws.com/hrr50-fec/AdrianPhotos/3rating.png'
      break;
      case 4:
-       starImage = 'star4.png'
+       starImage = 'https://badgersnax.s3-us-west-2.amazonaws.com/hrr50-fec/AdrianPhotos/5rating.png'
      break;
      case 5:
-       starImage = 'star5.png'
+       starImage = 'https://badgersnax.s3-us-west-2.amazonaws.com/hrr50-fec/AdrianPhotos/boxback.jpg'
      break;
    }
 
 
     return (
       <div>
-        <h1 className='customerRev'>Customer reviews</h1>
-        <img src={starImage} className='globalStarResize'></img>
+        <CustomerRev>Customer reviews</CustomerRev>
+        <GlobalStarResize src={starImage}></GlobalStarResize>
         <OutOf>4.9 out of 5</OutOf>
-        <h1 className='globalRating'>{this.state.reviews.length} global ratings</h1>
+        <GlobalRating>{this.state.reviews.length} global ratings</GlobalRating>
         <BackgroundBar>
           <Bar></Bar>
         </BackgroundBar>
