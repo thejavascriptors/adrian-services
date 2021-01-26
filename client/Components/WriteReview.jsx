@@ -9,14 +9,13 @@ const ReviewText = styled.h1`
 position: relative;
 font-family: 'Roboto', sans-serif;
 font-size: 25px;
-font-weight 500
+font-weight 500;
 
 `
 
 
 const Container = styled.div`
 
-position: relative;
 left: -25rem;
 top: 68rem;
 border-bottom: 2px solid #e7e7e7;
@@ -27,7 +26,6 @@ width: 20rem;
 
 
 const TextStyle = styled.h1`
-position: relative;
 font-family: 'Roboto', sans-serif;
 font-size: 15px;
 font-weight 300;
@@ -36,7 +34,6 @@ font-weight 300;
 
 
 const ButtonAmazon = styled.button`
-position: relative;
 width: 100%;
 
 `

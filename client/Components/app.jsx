@@ -10,20 +10,19 @@ import WriteReview from './WriteReview.jsx'
 
 
 const ReviewComp = styled.div`
-position: relative;
-left: 30rem;
-top: 10rem;
+
+display: flex;
+flex-direction: row;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
 
 `
 
 const StarComp = styled.div`
-
-position: relative;
-left: -25rem;
-top: 26.5rem;
-width: 20rem;
+display: flex;
+flex-direction: column;
 border-bottom: 2px solid #e7e7e7;
-
 
 `
 
@@ -38,10 +37,8 @@ font-size: 20px;
 
 
 const Pagination = styled.div`
-  position: relative;
   display: inline-block;
-  top: 10rem;
-  left: 30rem;
+
   `
 
 const InsideDiv = styled.div`
@@ -74,8 +71,30 @@ text-decoration: none;
 cursor: grab;
 
 `
+const TestComp = styled.div`
+display: flex;
+flex-flow:row wrap;
+flex-direction: column
+
+`
 
 
+const MetionsBlock = styled.div`
+width:50rem;
+display: flex;
+
+`
+const ImageFlex = styled.div`
+display: flex;
+flex-direction: column;
+
+
+`
+
+const Selector = styled.select`
+width: 10%;
+
+`
 
 class App extends React.Component {
 
@@ -97,7 +116,6 @@ class App extends React.Component {
 
 
   changeMetionedReview(query) {
-    console.log('clicked')
     this.setState({
       metionedReview: query
     }
@@ -142,7 +160,6 @@ class App extends React.Component {
       this.setState({
         paginatedArray: paginatedArrays
       })
-      console.log(paginatedArrays, 'test')
     })
 
     // Get 5 reviews by splicing.
@@ -187,40 +204,53 @@ class App extends React.Component {
     return (
       <div>
         <ReviewComp>
-          <WriteReview />
+
+
+
+
           <StarComp>
             <Star props={this.state.reviews} />
+            <WriteReview />
           </StarComp>
-          <AmazonText>Customer images</AmazonText>
-          <Images />
-          <AmazonMore>See all customer images</AmazonMore>
-          <AmazonText>Read Reviews that mention</AmazonText>
-          <Mentions changeReview={this.changeMetionedReview.bind(this)} />
-          <select name="cars" id="cars" onChange={this.changeValue.bind(this)}>
-            <option value="top">Top reviews</option>
-            <option value='timed'>Most recent</option>
-          </select>
-          <AmazonText>Top reviews from the United States.</AmazonText>
-          {this.state.showingReviews.map(item => {
-            return item.review.includes(doesInclude) ? <Review props={item} /> : null
-          })
-          }
-        </ReviewComp>
-        <Pagination>
-          {this.state.paginatedArray.map(item => {
-            if (currNum === 0) {
-              pagNum = 0
-            } else {
-              pagNum++;
-            }
-            currNum++;
-            let AssignedVariable = pagNum
-            return pagNum !== 0 ? <PagNum onClick={() => this.changePage(AssignedVariable)}>{pagNum}</PagNum> : null
-            // onclick we change the showing to the paginated array clicked.
-          })
+          <TestComp>
+            <ImageFlex>
+              <AmazonText>Customer images</AmazonText>
+              <Images />
+              <AmazonMore>See all customer images</AmazonMore>
+            </ImageFlex>
+            <AmazonText>Read Reviews that mention</AmazonText>
+            <MetionsBlock>
+              <Mentions changeReview={this.changeMetionedReview.bind(this)} />
+            </MetionsBlock>
 
-          }
-        </Pagination>
+            <AmazonText>Top reviews from the United States.</AmazonText>
+            <Selector name="cars" id="cars" onChange={this.changeValue.bind(this)}>
+              <option value="top">Top reviews</option>
+              <option value='timed'>Most recent</option>
+            </Selector>
+            {this.state.showingReviews.map(item => {
+              return item.review.includes(doesInclude) ? <Review props={item} /> : null
+            })
+            }
+
+            <Pagination>
+              {this.state.paginatedArray.map(item => {
+                if (currNum === 0) {
+                  pagNum = 0
+                } else {
+                  pagNum++;
+                }
+                currNum++;
+                let AssignedVariable = pagNum
+                return pagNum !== 0 ? <PagNum onClick={() => this.changePage(AssignedVariable)}>{pagNum}</PagNum> : null
+                // onclick we change the showing to the paginated array clicked.
+              })
+
+              }
+            </Pagination>
+          </TestComp>
+        </ReviewComp>
+
       </div>
     )
   }

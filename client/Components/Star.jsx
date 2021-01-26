@@ -255,19 +255,19 @@ class Star extends React.Component {
    let star4Value = (star4 / this.state.reviews.length) * 100
    let star5Value = (star5 / this.state.reviews.length) * 100
    console.log(star5Value)
-    document.querySelector('.sc-gsTCUz').style.width = `${star5Value}%`
-    document.querySelector('.sc-dlfnbm').style.width = `${star4Value}%`
-    document.querySelector('.sc-hKgILt').style.width = `${star3Value}%`
-    document.querySelector('.sc-eCssSg').style.width = `${star2Value}%`
-    document.querySelector('.sc-jSgupP').style.width = `${star1Value}%`
+    document.querySelector('.star5_percent').style.width = `${star5Value}%`
+    document.querySelector('.star4_percent').style.width = `${star4Value}%`
+    document.querySelector('.star3_percent').style.width = `${star3Value}%`
+    document.querySelector('.star2_percent').style.width = `${star2Value}%`
+    document.querySelector('.star1_percent').style.width = `${star1Value}%`
 
 
 
-    document.querySelector('.sc-gKsewC').innerHTML = `${Math.floor(star5Value)}%`
-    document.querySelector('.sc-iBPRYJ').innerHTML = `${Math.floor(star4Value)}%`
-    document.querySelector('.sc-fubCfw').innerHTML = `${Math.floor(star3Value)}%`
-    document.querySelector('.sc-pFZIQ').innerHTML = `${Math.floor(star2Value)}%`
-    document.querySelector('.sc-jrAGrp').innerHTML = `${Math.floor(star1Value)}%`
+    document.querySelector('.star_5').innerHTML = `${Math.floor(star5Value)}%`
+    document.querySelector('.star_4').innerHTML = `${Math.floor(star4Value)}%`
+    document.querySelector('.star_3').innerHTML = `${Math.floor(star3Value)}%`
+    document.querySelector('.star_2').innerHTML = `${Math.floor(star2Value)}%`
+    document.querySelector('.star_1').innerHTML = `${Math.floor(star1Value)}%`
 
     let starAvg = (5 * star5 + 4 * star4 + 3 *star3 + 2 *star2 + 1 * star1) / (star5 + star4 + star3 + star2 + star1)
 
@@ -322,29 +322,29 @@ class Star extends React.Component {
         <OutOf>4.9 out of 5</OutOf>
         <GlobalRating>{this.state.reviews.length} global ratings</GlobalRating>
         <BackgroundBar>
-          <Bar></Bar>
+          <Bar className = 'star5_percent'></Bar>
         </BackgroundBar>
-        <Lettering>0%</Lettering>
+        <Lettering className = 'star_5'>0%</Lettering>
         <Stars>5 star</Stars>
         <BackgroundBar>
-          <Bar2></Bar2>
+          <Bar2 className = 'star4_percent'></Bar2>
         </BackgroundBar>
-        <Lettering2></Lettering2>
+        <Lettering2 className = 'star_4'></Lettering2>
         <Stars>4 star</Stars>
         <BackgroundBar>
-          <Bar3></Bar3>
+          <Bar3 className = 'star3_percent'></Bar3>
         </BackgroundBar>
-        <Lettering3></Lettering3>
+        <Lettering3 className = 'star_3'></Lettering3>
         <Stars>3 star</Stars>
         <BackgroundBar>
-          <Bar4></Bar4>
+          <Bar4 className = 'star2_percent'></Bar4>
         </BackgroundBar>
-        <Lettering4>0%</Lettering4>
+        <Lettering4 className = 'star_2'>0%</Lettering4>
         <Stars>2 star</Stars>
         <BackgroundBar>
-          <Bar5></Bar5>
+          <Bar5 className = 'star1_percent'></Bar5>
         </BackgroundBar>
-        <Lettering5>0%</Lettering5>
+        <Lettering5 className = 'star_1'>0%</Lettering5>
         <Stars>1 star</Stars>
         <AmazonRating> <Caret>&lsaquo;</Caret> How are ratings reviewed?</AmazonRating>
       </div>

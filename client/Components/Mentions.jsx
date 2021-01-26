@@ -6,7 +6,7 @@ import styled from 'styled-components'
 const AmazonMentions = styled.div`
   display: flex;
   flex-flow: row wrap;
-  width: 49rem;
+  width: 100rem;
 
 `
 
