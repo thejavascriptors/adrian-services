@@ -14,15 +14,15 @@ import WriteReview from './WriteReview.jsx'
  `
 const ReviewComp = styled.div`
 
-display: flex;
-flex-direction: row;
+  display: flex;
+  flex-direction: row;
   align-items: flex-start;
   flex-wrap: wrap;
   justify-content: space-evenly;
   -webkit-transform:scale(0.8);
   -moz-transform:scale(0.5);
--ms-transform:scale(0.5);
-transform:scale(0.8);
+  -ms-transform:scale(0.5);
+  transform:scale(0.8);
 `
 
 const StarComp = styled.div`
