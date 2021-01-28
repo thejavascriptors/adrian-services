@@ -137,6 +137,7 @@ left: 0.5rem;
 font-size: 15px;
 font-family : 'Roboto', sans-serif;
 font-weight : 500;
+cursor: grab;
 `
 const OutOf = styled.h1`
 position: relative;
