@@ -216,7 +216,7 @@ class Star extends React.Component {
 
 
   componentDidMount() {
-    Axios('http://localhost:3000/reviews').then(reviews => {
+    Axios('/reviews').then(reviews => {
        console.log(reviews.data)
        this.setState({
          reviews: reviews.data
