@@ -22,25 +22,20 @@ const ReviewComp = styled.div`
   align-items: flex-start;
   flex-wrap: wrap;
   justify-content: space-evenly;
-  -webkit-transform:scale(0.8);
-  -moz-transform:scale(0.5);
-  -ms-transform:scale(0.5);
-  transform:scale(0.8);
+  min-inline-size: max-content
+
 `
 
 const StarComp = styled.div`
 display: flex;
 flex-direction: column;
 border-bottom: 2px solid #e7e7e7;
-
 `
 
 
 const AmazonText = styled.h1`
-
 font-family: 'Roboto', sans-serif;
 font-size: 20px;
-
 `
 
 
@@ -65,6 +60,9 @@ font-family: 'Roboto', sans-serif;
 font-size: 15px;
 font-weight: 500;
 color: #007185;
+cursor: grab;
+
+
 
 `
 
@@ -96,12 +94,35 @@ display: flex;
 const ImageFlex = styled.div`
 display: flex;
 flex-direction: column;
+`
+
+
+const Selector = styled.select`
+width: 10%;
+
+`
+
+const CurrentMetion = styled.h1`
+font-family: 'Roboto', sans-serif;
+font-weight: 500;
+font-size: 20px;
+`
+const FlexMetion = styled.div`
+display: flex;
+flex-direction: row;
 
 
 `
 
-const Selector = styled.select`
-width: 10%;
+const ClearMetion = styled.h1`
+postion: relative;
+ font-family: 'Roboto', sans-serif;
+ font-weight: 500;
+ font-size: 20px;
+ color: #007185;
+ left: 1rem;
+ cursor:grab;
+
 
 `
 
@@ -114,7 +135,8 @@ class App extends React.Component {
       showingReviews: [],
       metionedReview: '',
       paginatedArray: [],
-      currentSelector: 'top'
+      currentSelector: 'top',
+      currentLength: 0
 
     }
   }
@@ -125,13 +147,27 @@ class App extends React.Component {
 
 
   changeMetionedReview(query) {
-    this.setState({
-      metionedReview: query
-    }
-    )
+  Axios('/reviews').then(reviews => {
+
+   this.setState({
+     showingReviews: reviews.data
+   })
+
+
+   this.setState({
+    metionedReview: query
+  } )
+
+  console.log('test')
+  });
+
+
+
+
   }
 
   componentDidMount() {
+
     Axios('/reviews').then(reviews => {
       if (this.state.currentSelector === 'top') {
         reviews.data.sort((a, b) => {
@@ -189,7 +225,13 @@ class App extends React.Component {
 
 
 
+ resetSearch () {
+   this.setState({
+     metionedReview: ''
+   })
 
+   this.componentDidMount();
+ }
 
 
 
@@ -227,12 +269,14 @@ class App extends React.Component {
             <MetionsBlock>
               <Mentions changeReview={this.changeMetionedReview.bind(this)} />
             </MetionsBlock>
-
-            <AmazonText>Top reviews from the United States.</AmazonText>
             <Selector name="cars" id="cars" onChange={this.changeValue.bind(this)}>
               <option value="top">Top reviews</option>
               <option value='timed'>Most recent</option>
-            </Selector>
+              </Selector>
+              <AmazonText>Top reviews from the United States.</AmazonText>
+              { this.state.metionedReview !== '' ? <FlexMetion><CurrentMetion>Showing {this.state.showingReviews.length} reviews with "{this.state.metionedReview}"</CurrentMetion> <ClearMetion onClick = {this.resetSearch.bind(this)}> Clear filter.</ClearMetion></FlexMetion> : null}
+
+
             {this.state.showingReviews.map(item => {
               return item.review.includes(doesInclude) ? <Review props={item} /> : null
             })

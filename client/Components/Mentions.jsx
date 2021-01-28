@@ -68,7 +68,6 @@ function Mentions(props) {
          <MetionBlock onClick={() => props.changeReview('computer')}>computer</MetionBlock>
          <MetionBlock onClick={() => props.changeReview('expensive controller')}>expensive controller</MetionBlock>
          <MetionBlock  onClick={() => props.changeReview('bad battery')}>bad battery</MetionBlock>
-         <MetionBlock  onClick={() => props.changeReview('')}>All</MetionBlock>
       </AmazonMentions>
    )
 

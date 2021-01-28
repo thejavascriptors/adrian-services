@@ -5,7 +5,7 @@ import styled from 'styled-components'
 
 
 
-const ReviewText = styled.div`
+const ReviewText = styled.h1`
 position: relative;
 font-family: 'Roboto', sans-serif;
 font-size: 25px;
@@ -25,7 +25,7 @@ width: 20rem;
 
 
 
-const TextStyle = styled.div`
+const TextStyle = styled.h1`
 font-family: 'Roboto', sans-serif;
 font-size: 15px;
 font-weight 300;
@@ -35,6 +35,7 @@ font-weight 300;
 
 const ButtonAmazon = styled.button`
 width: 100%;
+height: 2rem;
 
 `
 
