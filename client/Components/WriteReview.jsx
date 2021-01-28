@@ -5,7 +5,7 @@ import styled from 'styled-components'
 
 
 
-const ReviewText = styled.h1`
+const ReviewText = styled.div`
 position: relative;
 font-family: 'Roboto', sans-serif;
 font-size: 25px;
@@ -25,7 +25,7 @@ width: 20rem;
 
 
 
-const TextStyle = styled.h1`
+const TextStyle = styled.div`
 font-family: 'Roboto', sans-serif;
 font-size: 15px;
 font-weight 300;

@@ -8,8 +8,11 @@ import styled from 'styled-components'
 import WriteReview from './WriteReview.jsx'
 
 
- const MainDiv = styled.div`
-  overflow-y: hidden;
+const MainDiv = styled.div`
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  margin: 0;
 
  `
 const ReviewComp = styled.div`
@@ -129,7 +132,7 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    Axios('http://localhost:3000/reviews').then(reviews => {
+    Axios('/reviews').then(reviews => {
       if (this.state.currentSelector === 'top') {
         reviews.data.sort((a, b) => {
           return a.foundHelpful - b.foundHelpful
@@ -208,11 +211,7 @@ class App extends React.Component {
     let pagNum = 0;
     let currNum = 0;
     return (
-      <MainDiv>
         <ReviewComp>
-
-
-
 
           <StarComp>
             <Star props={this.state.reviews} />
@@ -256,8 +255,6 @@ class App extends React.Component {
             </Pagination>
           </TestComp>
         </ReviewComp>
-
-      </MainDiv>
     )
   }
 
