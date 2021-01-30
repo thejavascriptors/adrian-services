@@ -44,6 +44,12 @@ background-color: #D7E8EA;
 margin: 0px 10px 14px 0px;
 cursor: grab;
 
+
+ &&:active {
+   background-color: #00464F;
+   color: #D7E8EA;
+ }
+
 `
 
 function Mentions(props) {

@@ -158,14 +158,165 @@ const sampleReviews = [
     review: `I bought this controller to use with my pc because I really wanted to try it and plus I recently had shoulder surgery and can’t use my keyboard and mouse. Now the controller itself is amazing but I paid $70 for this controller.`,
     stars: 1,
     foundHelpful: 4
-  }
+  },
+
+  {
+    username: 'Aravind',
+    title: 'Game Changer',
+    review: `The haptics and the adaptive triggers are a real game changer; The bigger size makes it more ergonomic than the dualShock and is way more comfortable over longer duration.
+    and finally, having charging options with both USB-C and micro USB is such a welcome change. next gen`,
+    stars: 4,
+    foundHelpful: 22
+  },
+
+  {
+    username: 'Olashanna currie',
+    title: 'Game Changer',
+    review: `XOXO`,
+    stars: 5,
+    foundHelpful: 982
+  },
+
+  {
+    username: 'Zac and Jade',
+    title: 'Trigger effects are amazing',
+    review: `Love this controller best controller Sony has made. The trigger effects are amazing gotta feel it to believe it. Cold War makes good use of them. Everything feels so real can feel water rushing below your feet controller ever`,
+    stars: 5,
+    foundHelpful: 19
+  },
+
+  {
+    username: 'Andrés Londoño',
+    title: 'It is a great controller',
+    review: `All of its new features are amazing and the grip itself eels better than the PS4 controller. That being said, the battery life has depleted significantly since I bought it (the one which came with the PS5 as well)., so it is a must to have two, even maybe 3 controllers. best controller`,
+    stars: 3,
+    foundHelpful: 10
+  },
+
+  {
+    username: 'Jose',
+    title: 'It is a great controller',
+    review: `Game consoles should come with two controllers. But Sony and Microsoft need to make the $$$, so you have to buy a second controller.`,
+    stars: 1,
+    foundHelpful: 90
+  },
+
+  {
+    username: 'CL',
+    title: ' Fast shipping and great product',
+    review: `Great Product, no issues and fast delivery`,
+    stars: 5,
+    foundHelpful: 10
+  },
+  {
+    username: 'Patricia J',
+    title: 'NOT WORKS WHY?',
+    review: `IT NOT WORK CANT RECOMMEND BAD BATTERY`,
+    stars: 1,
+    foundHelpful:999
+  },
+
+  {
+    username: 'Lou',
+    title: 'PC users - works in steam - NOT in some games (COD)',
+    review: `Love the controller. Like that they did something new unlike MS. Works fine in steam and all steam titles, but right now it does NOT work with COD / WARZONE. Hoping there is an update soon, or a way to use the steam overlay with COD. Will update to 5 stars once its fixed.`,
+    stars: 5,
+    foundHelpful: 109
+  },
+
+  {
+    username: '@skip',
+    title: 'Amazon Renewed is filthy',
+    review: `Purchased in very good condition to save about $12 taxes. Versus brand new. Controller arrived absolutely filthy, visible dirt smudges on touch pad, controller handles were grimy with previous owner dirt. `,
+    stars: 5,
+    foundHelpful:2
+  },
+
+
+  {
+    username: 'Dad',
+    title: `it's ok `,
+    review: `Honestly not a fan of this controller. I bought it on my PC for Rocket League and some other games I play on controller and i prefer the ps4 controller or xbox. its too wide and not comfortable to hold`,
+    stars: 4,
+    foundHelpful: 3
+  },
+
+  {
+    username: 'grandma',
+    title: `Meh.`,
+    review: `Since I received this one of the buttons intermittently sticks. I have to keep pressing it for it to become unstuck but, once it's unstuck it plays good until..it gets stuck again.`,
+    stars: 5,
+    foundHelpful: 32
+  },
+  {
+    username: 'Bryan',
+    title: `Great product`,
+    review: `The newest controller was a great gift for my boyfriend's PC, lots of steam games work with its bluetooth. He loves it :)
+    `,
+    stars: 5,
+    foundHelpful: 31
+  },
+
+
+
+  {
+    username: 'Greg',
+    title: `great price`,
+    review: `Its got a good feel the weight is good. buttons and look are clean and smooth. the haptic feedback is a cool feature. I haven't used the microphone but its interesting they added that to the controller. `,
+    stars: 5,
+    foundHelpful: 31
+  },
+
+
+  {
+    username: 'Morgan',
+    title: `PS5 ROCKS`,
+    review: `This is the best controller I have ever seen it is very detailed and very well worth the price.`,
+    stars: 5,
+    foundHelpful: 81
+  },
+
+  {
+    username: 'Alan',
+    title: `Great for gamers`,
+    review: `So comfortable and I feel like I am getting better at games because of this controller.`,
+    stars: 5,
+    foundHelpful: 22
+  },
+
+  {
+    username: 'Gregory',
+    title: `Gret`,
+    review: `I will never need another controller again. Great job sony I loved this product!`,
+    stars: 5,
+    foundHelpful: 11
+  },
+
+  {
+    username: 'Brett',
+    title: `cool but wish it was bigger`,
+    review: `I have big hands and wish the controller was at least a bit bigger.`,
+    stars: 5,
+    foundHelpful: 11
+  },
+
+
 
 
 ]
 
 
+for (let i = 0; i <= 62; i++) {
+  sampleReviews.push( {
+    username: faker.name.firstName(),
+    title: faker.name.title(),
+    review: faker.commerce.productDescription(),
+    stars: Math.floor(Math.random() * 5),
+    foundHelpful: Math.floor(Math.random() * 100)
+  })
 
 
+}
 
 
 
