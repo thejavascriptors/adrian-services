@@ -68,7 +68,7 @@ height: 2.5rem;
 const UserImg = styled.img`
 
 position: relative;
-left: -9rem;
+left: -8rem;
 border-radius: 50%;
 
 `
@@ -78,9 +78,10 @@ border-radius: 50%;
 const StarResize = styled.img`
 
 position: relative;
-width: 9rem;
-top: 2rem;
-height: 1.5rem;
+width: 8rem;
+left: 1rem;
+top: 2.4rem;
+height: 1.8rem;
 
 `
 

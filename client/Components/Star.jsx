@@ -10,6 +10,9 @@ box-shadow: inset 0 0 0 1px #E3E6E6;
 margin: 1px 0px -50px 0px;
 position: relative;
 left: 2rem;
+ &&:hover {
+  outline: 2px solid #DE7921;
+ }
 
 `
 
@@ -138,6 +141,10 @@ font-size: 15px;
 font-family : 'Roboto', sans-serif;
 font-weight : 500;
 cursor: grab;
+
+ &&:hover {
+  text-decoration: underline;
+ }
 `
 const OutOf = styled.h1`
 position: relative;

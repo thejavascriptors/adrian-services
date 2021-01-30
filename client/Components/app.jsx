@@ -62,6 +62,10 @@ font-weight: 500;
 color: #007185;
 cursor: grab;
 
+  &&:hover   {
+    text-decoration: underline;
+    }
+
 
 
 `
@@ -76,6 +80,17 @@ font-size: 15px;
 padding: 8px 16px;
 text-decoration: none;
 cursor: grab;
+
+&&:hover {
+      text-decoration: underline;
+
+}
+
+
+&&:active {
+  background-color: #00464F;
+  color: #D7E8EA;
+}
 
 `
 const TestComp = styled.div`
@@ -120,8 +135,15 @@ postion: relative;
  font-weight: 500;
  font-size: 20px;
  color: #007185;
- left: 1rem;
+ left: 2rem; !!important
  cursor:grab;
+
+
+
+  &&:hover {
+    text-decoration: underline;
+
+  }
 
 
 `
@@ -136,7 +158,8 @@ class App extends React.Component {
       metionedReview: '',
       paginatedArray: [],
       currentSelector: 'top',
-      currentLength: 0
+      currentLength: 0,
+      currentPage: 1,
 
     }
   }
@@ -221,6 +244,14 @@ class App extends React.Component {
     this.setState({
       showingReviews: this.state.paginatedArray[val]
     })
+
+
+    this.setState({
+      currentPage: val
+    })
+
+
+
   }
 
 
@@ -252,6 +283,12 @@ class App extends React.Component {
     let doesInclude = this.state.metionedReview
     let pagNum = 0;
     let currNum = 0;
+    let currentReviews = 0;
+    let newPaginatedArray =  this.state.paginatedArray.slice(0, this.state.currentPage + 2)
+
+    console.log(newPaginatedArray)
+
+
     return (
         <ReviewComp>
 
@@ -274,16 +311,21 @@ class App extends React.Component {
               <option value='timed'>Most recent</option>
               </Selector>
               <AmazonText>Top reviews from the United States.</AmazonText>
-              { this.state.metionedReview !== '' ? <FlexMetion><CurrentMetion>Showing {this.state.showingReviews.length} reviews with "{this.state.metionedReview}"</CurrentMetion> <ClearMetion onClick = {this.resetSearch.bind(this)}> Clear filter.</ClearMetion></FlexMetion> : null}
+              { this.state.metionedReview !== '' ? <FlexMetion><CurrentMetion>Showing reviews with "{this.state.metionedReview}"</CurrentMetion> <ClearMetion onClick = {this.resetSearch.bind(this)}> Clear filter.</ClearMetion></FlexMetion> : null}
 
 
             {this.state.showingReviews.map(item => {
-              return item.review.includes(doesInclude) ? <Review props={item} /> : null
+               if (item.review.includes(doesInclude)) {
+                 currentReviews++;
+               }
+              return item.review.includes(doesInclude) ? <Review props={item} />: null
             })
-            }
+           }
 
             <Pagination>
-              {this.state.paginatedArray.map(item => {
+
+
+              {newPaginatedArray.map(item => {
                 if (currNum === 0) {
                   pagNum = 0
                 } else {
