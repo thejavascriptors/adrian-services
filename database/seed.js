@@ -60,26 +60,41 @@ const endProgress = () => {
   process.stdout.write(`Progress: 100%`.padEnd(20) + `[${'='.repeat(20)}]`);
 }
 
-const seedDB = async (n = 10000000, uuidBufSiz = 1000) => {
-  if (n > uuidBufSiz) {
-    n /= uuidBufSiz;
+function *uuidFactory(n = 2000) {
+  while (true) {
+    let arr = mk_nUUIDS(n);
+    for (let uuid of arr) {
+      yield uuid;
+    }
   }
+}
+
+const seedDB = async (inserter, n = 10000000, bufSize = 1000) => {
+
+  console.time(' runtime');
+  let factory = uuidFactory();
+  let arr = new Array(bufSize);
+  let aptr = 0;
 
   for (let i = 0; i < n; i++) {
     writeProgress(i, n);
-    // every review needs 2 UUIDs
-    let uuids = mk_nUUIDS(uuidBufSiz << 1);
-    let uptr = 0;
-
-    let reviews = new Array(uuidBufSiz);
-    for (let j = 0; j < uuidBufSiz; j++) {
-      reviews[j] = genReviewArr(uuids[uptr++], uuids[uptr++]);
+    let lim = ~~(Math.random() * 24);
+    let prodId = factory.next().value;
+    for (let j = 0; j < lim; j++) {
+      let itemId = factory.next().value;
+      arr[aptr++] = genReviewArr(itemId, prodId);
+      if (aptr >= bufSize) {
+        await Promise.all(arr.map(inserter));
+        aptr = 0;
+      }
     }
-    await Promise.all(reviews.map(insertReview));
   }
 
-  // endProgress();
+  endProgress();
   console.timeEnd(' runtime');
 }
 
-seedDB(10000000, 1000);
+//todo: implement marsaglia polar method for generating normdist of product id's
+if (require.main === module) {
+  seedDB(insertReview, 10000000, 1000);
+}
