@@ -10,14 +10,14 @@ const process = require('process');
 const { reset } = require('nodemon');
 
 const genReviewArr = (u1, u2) => 
-  [ faker.name.firstName()
-  , u1
-  , u2
-  , faker.name.title()
-  , faker.commerce.productDescription()
-  , 1 + ~~(Math.random() * 5)
-  , 1 + ~~(Math.random() * 100)
-  ];
+[ u1
+, faker.name.firstName()
+, faker.name.title()
+, faker.commerce.productDescription()
+, 1 + (~~(Math.random() * 5))
+, u2
+, ~~(Math.random() * 100)
+]
 
 const genReview = (u1, u2) => ( 
   { username: faker.name.firstName()
@@ -64,7 +64,6 @@ const seedDB = async (n = 10000000, uuidBufSiz = 1000) => {
   if (n > uuidBufSiz) {
     n /= uuidBufSiz;
   }
-  console.time(' runtime');
 
   for (let i = 0; i < n; i++) {
     writeProgress(i, n);
@@ -76,11 +75,10 @@ const seedDB = async (n = 10000000, uuidBufSiz = 1000) => {
     for (let j = 0; j < uuidBufSiz; j++) {
       reviews[j] = genReviewArr(uuids[uptr++], uuids[uptr++]);
     }
-    // console.log(reviews.length);
-    // await Promise.all(reviews.map(insertReview));
+    await Promise.all(reviews.map(insertReview));
   }
 
-  endProgress();
+  // endProgress();
   console.timeEnd(' runtime');
 }
 

@@ -9,18 +9,16 @@ const revInsQuery =
     `insert into items 
         (id, username, title, review, stars, productId, foundHelpful)
         values 
-        (?,  ?,            ?,         ?,      ?,     ?,     ?);
+        (?,  ?,        ?,     ?,      ?,     ?,         ?);
     `
 
 /** 
  * @param {Array} items - [id, username, title, review, stars, productId, foundHelpful];
  * Insert an array of values into the Cassandra DB.
  */
-const insertReview = async (reviewArr) => {
-    let {id, username, title, review, stars, productId, foundHelpful} = reviewObj;
-    let params = [id, username, title, review, stars, productId, foundHelpful];
-    let res = await client.execute(revInsQuery, params, {prepare: true});
-}
+
+const insertReview = (reviewArr) => 
+    client.execute(revInsQuery, reviewArr, {prepare: true});
 
 module.exports = 
 { insertReview

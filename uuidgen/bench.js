@@ -24,7 +24,7 @@ const timeit = (f, n = 10000) => {
   console.log(`avg (${n} tests): ${b / n} ms`)
 }
 
-timeit(genUUID, 10000000);
-timeit(genJS, 10000000);
-timeit(() => mk_nUUIDS(100), 100000)
-// console.log(mk_nUUIDS(100));
+// timeit(genUUID, 10000000);
+// timeit(genJS, 10000000);
+// timeit(() => mk_nUUIDS(100), 100000)
+console.log(mk_nUUIDS(100));
