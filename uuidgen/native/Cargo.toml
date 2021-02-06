@@ -1,0 +1,19 @@
+[package]
+name = "uuidgen"
+version = "0.1.0"
+authors = ["Norman Liu <normanwuweiliu@gmail.com>"]
+license = "MIT"
+build = "build.rs"
+edition = "2018"
+exclude = ["artifacts.json", "index.node"]
+
+[lib]
+name = "uuidgen"
+crate-type = ["cdylib"]
+
+[build-dependencies]
+neon-build = "0.7.1"
+
+[dependencies]
+neon = "0.7.1"
+rand = "0.8.3"
