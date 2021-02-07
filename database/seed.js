@@ -60,7 +60,30 @@ const endProgress = () => {
   process.stdout.write(`Progress: 100%`.padEnd(20) + `[${'='.repeat(20)}]`);
 }
 
-function *uuidFactory(n = 2000) {
+class StatusBar {
+  constructor(limit) {
+    this.limit = limit;
+    console.time(' runtime');
+  }
+  resetCrg() {
+    process.stdout.clearLine();
+    process.stdout.cursorTo(0);
+  }
+  writeProgress(prog) {
+    this.resetCrg();
+    let tenth = (prog / this.limit * 10);
+    let progBar = ('[' + '='.repeat(tenth * 2) + '>'.repeat(tenth < 10)).padEnd(21) + ']';
+    process.stdout.write(`Progress: ${(tenth * 10).toFixed(2)}%`.padEnd(20) + progBar);
+  }
+
+  endProgress() {
+    this.resetCrg();
+    process.stdout.write(`Progress: 100%`.padEnd(20) + `[${'='.repeat(20)}]`);
+    console.timeEnd(' runtime')
+  }
+}
+
+function* uuidFactory(n = 2000) {
   while (true) {
     let arr = mk_nUUIDS(n);
     for (let uuid of arr) {
@@ -71,13 +94,14 @@ function *uuidFactory(n = 2000) {
 
 const seedDB = async (inserter, n = 10000000, bufSize = 1000) => {
 
-  console.time(' runtime');
   let factory = uuidFactory();
   let arr = new Array(bufSize);
   let aptr = 0;
 
+  let status = new StatusBar(n);
+
   for (let i = 0; i < n; i++) {
-    writeProgress(i, n);
+    status.writeProgress(i);
     let lim = ~~(Math.random() * 24);
     let prodId = factory.next().value;
     for (let j = 0; j < lim; j++) {
@@ -90,11 +114,14 @@ const seedDB = async (inserter, n = 10000000, bufSize = 1000) => {
     }
   }
 
-  endProgress();
-  console.timeEnd(' runtime');
+  status.endProgress();
 }
 
 //todo: implement marsaglia polar method for generating normdist of product id's
 if (require.main === module) {
   seedDB(insertReview, 10000000, 1000);
+}
+
+module.exports = {
+  StatusBar,
 }
