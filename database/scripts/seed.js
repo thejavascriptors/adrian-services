@@ -3,8 +3,8 @@
 const faker = require('faker')
 const crypto = require('crypto')
 const worker = require('worker_threads');
-const {genUUID, mk_nUUIDS} = require('../uuidgen');
-const {insertReview} = require('./cassandra.js');
+const {genUUID, mk_nUUIDS} = require('../../uuidgen/lib');
+const {insertReview} = require('../cassandra.js');
 const { uuid } = require('fast-check');
 const process = require('process');
 const { reset } = require('nodemon');
