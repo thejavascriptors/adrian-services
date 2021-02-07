@@ -1,8 +1,9 @@
-var assert = require('assert');
-var Axios = require('axios');
-var chai = require('chai')
-const should = chai.should();
+const assert = require('assert');
+const axios = require('axios');
+const chai = require('chai')
+const should = chai.should;
 const Reviews = require('../database/Review.js')
+
 
 // commenting out tests that require a running server
 // describe('Should get data from the api call.', function() {
