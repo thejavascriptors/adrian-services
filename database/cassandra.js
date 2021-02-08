@@ -11,7 +11,6 @@ const revInsQuery =
         values 
         (?,  ?,        ?,         ?,     ?,      ?,     ?,         ?)
     `
-// TODO update the seeding script to actually include a timestamp so i don't have to fix this again
 
 /** 
  * @param {Array} items - [id, username, title, review, stars, productId, foundHelpful];
@@ -21,7 +20,7 @@ const revInsQuery =
 const insertReview = (reviewArrs) => 
     cass.concurrent.executeConcurrent(client, revInsQuery, reviewArrs, {prepare: true});
 
-const defaultProduct = '5a8aae14-cc6e-9c4f-4b3a-44e20c3d79b0';
+const defaultProduct = 'ff03bda9-43ee-aa7d-44af-681059d2546c';
 
 const find = async (productId = defaultProduct) => {
     let selQuery = `

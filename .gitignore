@@ -60,3 +60,4 @@ native/artifacts.json
 **/.DS_Store
 
 newrelic.js
+bench

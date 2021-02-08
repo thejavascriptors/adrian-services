@@ -3,19 +3,6 @@ const {client, insertReview} = require('../cassandra.js');
 const {StatusBar} = require('./seed.js');
 const { Transform, Readable, Writable } = require('stream');
 
-
-const startTime = new Date(2000, 01, 01).valueOf();
-const endTime = Date.now();
-const timeDiff = endTime - startTime; // make these toplevel constants to prevent recomputation
-
-/**
- * @return {number} - create a random timestamp between start and end
- */
-const mkRndStamp = () => (Math.random() * timeDiff) + startTime;
-
-const queryStr = `select id from items`;
-
-
 /**
  * 
  * @param {number} max - Maximum expected number of operations
