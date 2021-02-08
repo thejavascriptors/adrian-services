@@ -7,9 +7,9 @@ const client = new cass.Client(
 
 const revInsQuery = 
     `insert into items 
-        (id, username, title, review, stars, productId, foundHelpful)
+        (id, username, createdAt, title, review, stars, productId, foundHelpful)
         values 
-        (?,  ?,        ?,     ?,      ?,     ?,         ?);
+        (?,  ?,        ?,         ?,     ?,      ?,     ?,         ?)
     `
 // TODO update the seeding script to actually include a timestamp so i don't have to fix this again
 
@@ -18,8 +18,8 @@ const revInsQuery =
  * Insert an array of values into the Cassandra DB.
  */
 
-const insertReview = (reviewArr) => 
-    client.execute(revInsQuery, reviewArr, {prepare: true});
+const insertReview = (reviewArrs) => 
+    cass.concurrent.executeConcurrent(client, revInsQuery, reviewArrs, {prepare: true});
 
 const defaultProduct = '5a8aae14-cc6e-9c4f-4b3a-44e20c3d79b0';
 
