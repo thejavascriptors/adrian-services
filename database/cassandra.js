@@ -1,6 +1,6 @@
 const cass = require('cassandra-driver');
 const client = new cass.Client(
-{ contactPoints: ['127.0.0.1:9042']
+{ contactPoints: ['192.168.0.23', '192.168.0.37']
 , keyspace: 'reviews'
 , localDataCenter: 'datacenter1'
 });
@@ -22,12 +22,23 @@ const insertReview = (reviewArrs) =>
 
 const defaultProduct = 'ff03bda9-43ee-aa7d-44af-681059d2546c';
 
+const selQuery = `
+    select createdat, foundhelpful, review, stars, title, username
+        from items 
+        where productid = ?
+    `;
+
+const jsonQuery = `
+    select json createdat, foundhelpful, review, stars, title, username
+        from items 
+        where productid = ?
+    `;
+
+const findCb = (productId = defaultProduct, cb) => {
+  client.execute(jsonQuery, [productId], { prepare: true }, cb);
+};
+
 const find = async (productId = defaultProduct) => {
-    let selQuery = `
-        select createdat, foundhelpful, review, stars, title, username
-            from items 
-            where productid = ?
-        `;
     let {rows} = await client.execute(selQuery, [productId], { prepare: true });
     return rows.map(renameFields);
 }
@@ -48,4 +59,5 @@ const renameFields = (reviewObj) => {
 module.exports = 
 { insertReview
 , find
+, findCb
 }

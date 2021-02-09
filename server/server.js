@@ -5,7 +5,11 @@ const PORT = 3000;
 const Reviews = require('../database/cassandra.js');
 const cors = require('cors');
 const path = require('path');
+const posix = require('posix');
 app.use(cors());
+
+// to increase concurrent connections
+posix.setrlimit('nofile', {soft: 8192});
 
 
 // app.use(express.static(path.join(__dirname, '../public')));
@@ -17,18 +21,25 @@ app.get('/', (req,res) => {
 
 })
 
+// lifting callbacks into top scope is faster
+function handleRows(res) {
+  return (err, data) => {
+    if (err) {
+      res.status(400).end();
+    } else {
+      res.status(200);
+      let row;
+      for (row of data.rows) {
+        res.write(row['[json]']);
+      }
+      res.end();
+    }
+  };
+}
 
-app.get('/reviews/:productId?', async (req, res) => {
-  try {
-    // console.log('GET request recieved.')
-    const data = await Reviews.find(req.params.productId);
-    res.status(200).json(data).end();
-  } catch(err) {
-    console.error(err);
-    res.status(400).end();
-  }
-
-
+app.get('/reviews/:productId?', (req, res) => {
+  // console.log('GET request recieved.')
+  Reviews.findCb(req.params.productId, handleRows(res));
 });
 
 

@@ -27,6 +27,7 @@
     "mongoose": "~4.10",
     "newrelic": "^7.1.1",
     "nodemon": "^2.0.7",
+    "posix": "^4.2.0",
     "react": "^16.14.0",
     "react-dom": "^16.14.0",
     "react-is": "^16.13.1",
