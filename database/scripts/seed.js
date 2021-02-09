@@ -2,38 +2,21 @@
 // const Review = require('./Review.js')
 const faker = require('faker')
 const crypto = require('crypto')
+const worker = require('worker_threads');
 const {genUUID, mk_nUUIDS} = require('../../uuidgen/lib');
 const {insertReview} = require('../cassandra.js');
+const { uuid } = require('fast-check');
 const process = require('process');
 const { reset } = require('nodemon');
 
-
-const startTime = new Date(2000, 1, 1).valueOf();
-const endTime = Date.now();
-const timeDiff = endTime - startTime; // make these toplevel constants to prevent recomputation
-
-/**
- * @return {number} - create a random timestamp between start and end
- */
-const mkRndStamp = () => (Math.random() * timeDiff) + startTime;
-
-const queryStr = `select id from items`;
-
-const genReviewBody = () => {
-    return faker.lorem.sentences((1 + ~~(Math.random() * 10)) + 1 + ~~(Math.random() * 10));
-    // generate a roughly-normal distribution
-}
-
-// order matters more here
 const genReviewArr = (u1, u2) => 
 [ u1
-, faker.name.findName()
-, mkRndStamp()
-, faker.company.catchPhrase()
-, genReviewBody()
+, faker.name.firstName()
+, faker.name.title()
+, faker.commerce.productDescription()
 , 1 + (~~(Math.random() * 5))
 , u2
-, ~~(Math.random() * 1024)
+, ~~(Math.random() * 100)
 ]
 
 const genReview = (u1, u2) => ( 
@@ -61,6 +44,22 @@ const gen = () => {
   console.timeEnd('timer');
 }
 
+const resetCrg = () => {
+  process.stdout.clearLine();
+  process.stdout.cursorTo(0);
+}
+const writeProgress = (prog, limit) => {
+  resetCrg();
+  let tenth = (prog / limit * 10);
+  let progBar = ('[' + '='.repeat(tenth * 2) + '>'.repeat(tenth < 10)).padEnd(21) + ']';
+  process.stdout.write(`Progress: ${(tenth * 10).toFixed(0)}%`.padEnd(20) + progBar);
+}
+
+const endProgress = () => {
+  resetCrg();
+  process.stdout.write(`Progress: 100%`.padEnd(20) + `[${'='.repeat(20)}]`);
+}
+
 class StatusBar {
   constructor(limit) {
     this.limit = limit;
@@ -84,7 +83,7 @@ class StatusBar {
   }
 }
 
-function* uuidFactory(n = 2048) {
+function* uuidFactory(n = 2000) {
   while (true) {
     let arr = mk_nUUIDS(n);
     for (let uuid of arr) {
@@ -93,7 +92,7 @@ function* uuidFactory(n = 2048) {
   }
 }
 
-const seedDB = async (inserter, n = 10000000, bufSize = 1024) => {
+const seedDB = async (inserter, n = 10000000, bufSize = 1000) => {
 
   let factory = uuidFactory();
   let arr = new Array(bufSize);
@@ -103,15 +102,13 @@ const seedDB = async (inserter, n = 10000000, bufSize = 1024) => {
 
   for (let i = 0; i < n; i++) {
     status.writeProgress(i);
-
     let lim = ~~(Math.random() * 24);
     let prodId = factory.next().value;
-
     for (let j = 0; j < lim; j++) {
       let itemId = factory.next().value;
       arr[aptr++] = genReviewArr(itemId, prodId);
       if (aptr >= bufSize) {
-        await inserter(arr);
+        await Promise.all(arr.map(inserter));
         aptr = 0;
       }
     }
@@ -122,7 +119,7 @@ const seedDB = async (inserter, n = 10000000, bufSize = 1024) => {
 
 //todo: implement marsaglia polar method for generating normdist of product id's
 if (require.main === module) {
-  seedDB(insertReview);
+  seedDB(insertReview, 10000000, 1000);
 }
 
 module.exports = {
