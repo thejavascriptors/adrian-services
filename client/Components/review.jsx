@@ -1,5 +1,4 @@
 import React from 'react';
-import moment from 'moment'
 import Star from './Star.jsx'
 import styled from 'styled-components'
 
@@ -24,6 +23,7 @@ font-size: 15px;
 `
 const AmazonReview = styled.h1`
 
+[nodemon] watching path(s): *.*
 font-family: 'Roboto', sans-serif;
 font-size: 20px;
 font-weight: 300;
@@ -76,50 +76,61 @@ border-radius: 50%;
 
 
 const StarResize = styled.img`
-
-position: relative;
-width: 8rem;
-left: 1rem;
-top: 2.4rem;
-height: 1.8rem;
+   position: relative;
+   width: 8rem;
+   left: 1rem;
+   top: 2.4rem;
+   height: 1.8rem;
 
 `
 
-function Review(props) {
-   let starImage = 'star.png'
+const mkStarUrl = (n) =>
+   `https://badgersnax.s3-us-west-2.amazonaws.com/hrr50-fec/AdrianPhotos/${n}rating.png`;
 
-   switch (props.props.stars) {
-      case 1:
-         starImage = 'https://badgersnax.s3-us-west-2.amazonaws.com/hrr50-fec/AdrianPhotos/1rating.png'
-        break;
-        case 2:
-          starImage = 'https://badgersnax.s3-us-west-2.amazonaws.com/hrr50-fec/AdrianPhotos/2rating.png'
-        break;
-        case 3:
-          starImage = 'https://badgersnax.s3-us-west-2.amazonaws.com/hrr50-fec/AdrianPhotos/3rating.png'
-        break;
-        case 4:
-          starImage = 'https://badgersnax.s3-us-west-2.amazonaws.com/hrr50-fec/AdrianPhotos/4rating.png'
-        break;
-        case 5:
-          starImage = 'https://badgersnax.s3-us-west-2.amazonaws.com/hrr50-fec/AdrianPhotos/5rating.png'
-        break;
+const fmtDate = (date) => {
+   let months = [ 'January'
+                , 'February'
+                , 'March'
+                , 'April'
+                , 'May'
+                , 'June'
+                , 'July'
+                , 'August'
+                , 'September'
+                , 'October'
+                , 'November'
+                , 'December'
+                ];
+   let fmtSuffix = (n) => {
+      switch(n % 10) {
+         case 1:  return 'st';
+         case 2:  return 'nd';
+         case 3:  return 'rd';
+         default: return 'th';
+      }
    }
 
+   let utcd = date.getDate();
+   return `${date.getMonth()} ${utcd}${fmtSuffix(utcd)} ${date.getFullYear()}`;
+}
 
+function Review(props) {
+   let starImage = mkStarUrl(props.props.stars);
 
+   let { username, title, review, foundhelpful, createdat } = props.props;
+   // not even gonna try refactoring this fully
 
    return (
       <div>
-         <AmazonUser>{props.props.username}</AmazonUser>
+         <AmazonUser>{username}</AmazonUser>
          <StarResize src={starImage}></StarResize>
          <UserImg src='https://badgersnax.s3-us-west-2.amazonaws.com/hrr50-fec/AdrianPhotos/ninja.jpg'></UserImg>
-         <AmazonTitle>{props.props.title}</AmazonTitle>
-         <AmazonHelpful>Reviewed in the United States on {moment(props.props.createdAt).format('MMMM do YYYY')}</AmazonHelpful>
+         <AmazonTitle>{title}</AmazonTitle>
+         <AmazonHelpful>Reviewed in the United States on {fmtDate(createdat)}</AmazonHelpful>
          <BalanceReview>
-            <AmazonReview>{props.props.review}</AmazonReview>
+            <AmazonReview>{review}</AmazonReview>
          </BalanceReview>
-         <AmazonHelpful>{props.props.foundHelpful} found this helpful.</AmazonHelpful>
+         <AmazonHelpful>{foundhelpful} found this helpful.</AmazonHelpful>
          <AmazonButton>Helpful</AmazonButton>
          <AmazonAbuse>| Report abuse</AmazonAbuse>
       </div>

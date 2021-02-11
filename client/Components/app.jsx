@@ -170,7 +170,7 @@ class App extends React.Component {
 
 
   changeMetionedReview(query) {
-  Axios('/reviews').then(reviews => {
+  Axios.get('/reviews').then(reviews => {
 
    this.setState({
      showingReviews: reviews.data
@@ -191,7 +191,7 @@ class App extends React.Component {
 
   componentDidMount() {
 
-    Axios('/reviews').then(reviews => {
+    Axios.get('/reviews').then(reviews => {
       if (this.state.currentSelector === 'top') {
         reviews.data.sort((a, b) => {
           return a.foundHelpful - b.foundHelpful

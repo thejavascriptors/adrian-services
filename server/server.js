@@ -12,7 +12,7 @@ app.use(cors());
 posix.setrlimit('nofile', {soft: 8192});
 
 
-// app.use(express.static(path.join(__dirname, '../public')));
+app.use(express.static(path.join(__dirname, '../public')));
 
 app.get('/', (req,res) => {
 
