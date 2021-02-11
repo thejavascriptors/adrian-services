@@ -1,6 +1,7 @@
 const cass = require('cassandra-driver');
+const process = require('process');
 const client = new cass.Client(
-{ contactPoints: ['192.168.0.23', '192.168.0.37']
+{ contactPoints: [process.env.DB_URL ?? 'http://127.0.0.1']
 , keyspace: 'reviews'
 , localDataCenter: 'datacenter1'
 });

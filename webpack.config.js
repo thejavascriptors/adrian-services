@@ -14,6 +14,7 @@ module.exports = {
         include: `${__dirname}/client`,
         loader: 'babel-loader',
         query: {
+          // plugins: ['@babel/plugin-proposal-object-rest-spread'],
           presets: ['react', 'es2015']
         }
       }

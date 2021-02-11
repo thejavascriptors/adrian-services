@@ -16,8 +16,6 @@ left: 2rem;
 
 `
 
-
-
 const Bar = styled.div`
 width: 92%;
 height: 30px;
@@ -225,7 +223,6 @@ class Star extends React.Component {
 
   componentDidMount() {
     Axios('/reviews').then(reviews => {
-       console.log(reviews.data)
        this.setState({
          reviews: reviews.data
        })
@@ -263,7 +260,6 @@ class Star extends React.Component {
    let star3Value = (star3 / this.state.reviews.length) * 100
    let star4Value = (star4 / this.state.reviews.length) * 100
    let star5Value = (star5 / this.state.reviews.length) * 100
-   console.log(star5Value)
     document.querySelector('.star5_percent').style.width = `${star5Value}%`
     document.querySelector('.star4_percent').style.width = `${star4Value}%`
     document.querySelector('.star3_percent').style.width = `${star3Value}%`

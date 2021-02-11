@@ -5,7 +5,7 @@
   "author": "",
   "license": "",
   "engines": {
-    "node": ">=6.13.0"
+    "node": ">=14.15.0"
   },
   "scripts": {
     "seed": "node database/scripts/seed.js",
@@ -35,6 +35,8 @@
     "webpack": "^2.2.1"
   },
   "devDependencies": {
+    "@babel/core": "^7.12.13",
+    "@babel/plugin-proposal-object-rest-spread": "^7.12.13",
     "babel-core": "^6.23.1",
     "babel-loader": "^6.3.2",
     "babel-preset-es2015": "^6.22.0",

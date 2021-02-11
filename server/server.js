@@ -1,4 +1,4 @@
-require('newrelic');
+// require('newrelic');
 const express = require('express');
 const app = express();
 const PORT = 3000;
@@ -28,11 +28,17 @@ function handleRows(res) {
       res.status(400).end();
     } else {
       res.status(200);
-      let row;
-      for (row of data.rows) {
-        res.write(row['[json]']);
+      let rows = data.rows; // prevent extra dereferencing
+      res.write('['); // manual JSON since we're not marshalling into native data types
+      let lim = rows.length - 1;
+      for (let i = 0; i < lim; i++) {
+        res.write(rows[i]['[json]']);
+        res.write(',');
       }
+      res.write(rows[lim]['[json]']); // prevent trailing ','
+      res.write(']');
       res.end();
+
     }
   };
 }

@@ -111,13 +111,13 @@ const fmtDate = (date) => {
    }
 
    let utcd = date.getDate();
-   return `${date.getMonth()} ${utcd}${fmtSuffix(utcd)} ${date.getFullYear()}`;
+   return `${months[date.getMonth()]} ${utcd}${fmtSuffix(utcd)} ${date.getFullYear()}`;
 }
 
 function Review(props) {
    let starImage = mkStarUrl(props.props.stars);
 
-   let { username, title, review, foundhelpful, createdat } = props.props;
+   let { username, title, review, foundHelpful, createdAt } = props.props;
    // not even gonna try refactoring this fully
 
    return (
@@ -126,11 +126,11 @@ function Review(props) {
          <StarResize src={starImage}></StarResize>
          <UserImg src='https://badgersnax.s3-us-west-2.amazonaws.com/hrr50-fec/AdrianPhotos/ninja.jpg'></UserImg>
          <AmazonTitle>{title}</AmazonTitle>
-         <AmazonHelpful>Reviewed in the United States on {fmtDate(createdat)}</AmazonHelpful>
+         <AmazonHelpful>Reviewed in the United States on {fmtDate(createdAt)}</AmazonHelpful>
          <BalanceReview>
             <AmazonReview>{review}</AmazonReview>
          </BalanceReview>
-         <AmazonHelpful>{foundhelpful} found this helpful.</AmazonHelpful>
+         <AmazonHelpful>{foundHelpful} found this helpful.</AmazonHelpful>
          <AmazonButton>Helpful</AmazonButton>
          <AmazonAbuse>| Report abuse</AmazonAbuse>
       </div>
