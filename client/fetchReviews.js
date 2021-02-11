@@ -1,4 +1,4 @@
-import axios from 'axios';
+import {get} from 'axios';
 
 const serverURL = location.origin;
 
@@ -11,9 +11,8 @@ const marshalObj = (obj) => ({
     username: obj.username
 });
 const fetchReviews = () => 
-    axios.get(serverURL + '/reviews')
+    get(serverURL + '/reviews')
         .then(resp => resp.data.map(marshalObj))
-        .then(resp => {console.log('FETCH', resp); return resp})
         .catch(err => {console.log(err); return []})
 
 

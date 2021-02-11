@@ -1,25 +1,30 @@
 // require('newrelic');
 const express = require('express');
-const app = express();
 const PORT = 3000;
 const Reviews = require('../database/cassandra.js');
 const cors = require('cors');
 const path = require('path');
 const posix = require('posix');
+const expressStaticGzip = require('express-static-gzip');
+
+const app = express();
 app.use(cors());
 
 // to increase concurrent connections
 posix.setrlimit('nofile', {soft: 8192});
 
 
-app.use(express.static(path.join(__dirname, '../public')));
+app.use('/', expressStaticGzip(path.join(__dirname, '../public'), {
+  enableBrotli: true,
+  orderPreference: ['br', 'gz']
+}));
 
-app.get('/', (req,res) => {
+// app.get('/', (req,res) => {
 
- console.log('Request recieved.');
- res.status(200).end();
+//  console.log('Request recieved.');
+//  res.status(200).end();
 
-})
+// })
 
 // lifting callbacks into top scope is faster
 function handleRows(res) {

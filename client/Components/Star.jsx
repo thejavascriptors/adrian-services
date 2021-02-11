@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components'
-import Axios from 'axios'
+import fetchReviews from '../fetchReviews';
 
 const BackgroundBar = styled.div`
 width: 80%;
@@ -218,13 +218,10 @@ class Star extends React.Component {
     }
   }
 
-
-
-
   componentDidMount() {
-    Axios('/reviews').then(reviews => {
+    fetchReviews().then(reviews => {
        this.setState({
-         reviews: reviews.data
+         reviews
        })
     }).then(() => {
       let stars = new Array(6).fill(0);
@@ -238,7 +235,7 @@ class Star extends React.Component {
       for (let i = 1; i <= 5; i++) {
         let cur = pcts[i];
         document.querySelector(`.star${i}_percent`).style.width = `${cur}%`;
-        document.querySelector(`.star${i}`).innerHTML = `${~~cur}`;
+        document.querySelector(`.star_${i}`).innerHTML = `${~~cur}`;
         starAvg += i * stars[i];
       }
 

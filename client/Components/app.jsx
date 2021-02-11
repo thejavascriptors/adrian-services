@@ -1,5 +1,4 @@
 import React from 'react'
-import Axios from 'axios';
 import Review from './review.jsx';
 import Mentions from './Mentions.jsx'
 import Images from './Images.jsx'

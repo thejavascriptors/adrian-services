@@ -1,6 +1,6 @@
 import React from 'react';
-import Star from './Star.jsx'
-import styled from 'styled-components'
+import Star from './Star.jsx';
+import styled from 'styled-components';
 
 
 const AmazonUser = styled.div`
@@ -138,12 +138,6 @@ function Review(props) {
 
 
    )
-
-
 }
-
-
-
-
 
 export default Review;
