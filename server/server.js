@@ -5,7 +5,7 @@ const Reviews = require('../database/cassandra.js');
 const cors = require('cors');
 const path = require('path');
 const posix = require('posix');
-const expressStaticGzip = require('express-static-gzip');
+// const expressStaticGzip = require('express-static-gzip');
 
 const app = express();
 app.use(cors());
@@ -14,10 +14,10 @@ app.use(cors());
 posix.setrlimit('nofile', {soft: 8192});
 
 
-app.use('/', expressStaticGzip(path.join(__dirname, '../public'), {
-  enableBrotli: true,
-  orderPreference: ['br', 'gz']
-}));
+// app.use('/', expressStaticGzip(path.join(__dirname, '../public'), {
+//   enableBrotli: true,
+//   orderPreference: ['br', 'gz']
+// }));
 
 // app.get('/', (req,res) => {
 

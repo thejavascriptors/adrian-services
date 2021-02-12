@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: congo-reviews
+  labels:
+    run: congo-reviews
+spec:
+  containers:
+  - name: congo-reviews
+    image: tobespliced

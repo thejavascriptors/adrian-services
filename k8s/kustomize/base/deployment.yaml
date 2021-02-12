@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: congo-reviews-server-deployment
+  labels:
+    app: congo-reviews
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: congo-reviews
+  template:
+    metadata:
+      labels:
+        app: congo-reviews
+    spec:
+      containers:
+      - name: congo-reviews
+        image: congo-reviews:latest
+        ports:
+        - containerPort: 80

@@ -9,9 +9,9 @@
   },
   "scripts": {
     "seed": "node database/scripts/seed.js",
-    "build": "webpack --mode production",
+    "build": "webpack --mode production -c webpack.config.js",
     "dev": "webpack -d inline-source-map --watch",
-    "start": "nodemon ./server/server.js",
+    "start": "node server/server.js",
     "test": "mocha",
     "delete": "node database/deleteData.js"
   },
@@ -49,6 +49,6 @@
     "fast-check": "^2.12.1",
     "mocha": "^8.2.1",
     "webpack": "^5.21.2",
-    "webpack-cli": "^4.3.1"
+    "webpack-cli": "^4.5.0"
   }
 }
