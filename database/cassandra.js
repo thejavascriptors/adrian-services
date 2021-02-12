@@ -1,15 +1,15 @@
 const cass = require('cassandra-driver');
 const client = new cass.Client(
-{ contactPoints: ['127.0.0.1:9042']
+{ contactPoints: ['192.168.0.23', '192.168.0.37']
 , keyspace: 'reviews'
 , localDataCenter: 'datacenter1'
 });
 
 const revInsQuery = 
     `insert into items 
-        (id, username, title, review, stars, productId, foundHelpful)
+        (id, username, createdAt, title, review, stars, productId, foundHelpful)
         values 
-        (?,  ?,        ?,     ?,      ?,     ?,         ?);
+        (?,  ?,        ?,         ?,     ?,      ?,     ?,         ?)
     `
 
 /** 
@@ -17,19 +17,47 @@ const revInsQuery =
  * Insert an array of values into the Cassandra DB.
  */
 
-const insertReview = (reviewArr) => 
-    client.execute(revInsQuery, reviewArr, {prepare: true});
+const insertReview = (reviewArrs) => 
+    cass.concurrent.executeConcurrent(client, revInsQuery, reviewArrs, {prepare: true});
+
+const defaultProduct = 'ff03bda9-43ee-aa7d-44af-681059d2546c';
+
+const selQuery = `
+    select createdat, foundhelpful, review, stars, title, username
+        from items 
+        where productid = ?
+    `;
+
+const jsonQuery = `
+    select json createdat, foundhelpful, review, stars, title, username
+        from items 
+        where productid = ?
+    `;
+
+const findCb = (productId = defaultProduct, cb) => {
+  client.execute(jsonQuery, [productId], { prepare: true }, cb);
+};
+
+const find = async (productId = defaultProduct) => {
+    let {rows} = await client.execute(selQuery, [productId], { prepare: true });
+    return rows.map(renameFields);
+}
+
+// camelcase vibes
+const renameFields = (reviewObj) => {
+    let {foundhelpful, createdat, ...keys} = reviewObj;
+    return ( 
+    { foundHelpful: foundhelpful
+    , createdAt: createdat
+    , ...keys
+    }
+    )
+    ;
+    
+}
 
 module.exports = 
 { insertReview
-, client
+, find
+, findCb
 }
-
-/*
- 5a8aae14-cc6e-9c4f-4b3a-44e20c3d79b0
- 70a33c3f-d51c-b9a8-44fe-d99ebcc8f58e
- 921fdf83-b6a8-9764-44b9-91bc022825d0
- afa43218-b564-ab11-44ce-3fec27d32e1c
- 4d2fad97-08c2-974e-4ae9-ba9de290a23d
-
-*/

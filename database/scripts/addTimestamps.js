@@ -3,19 +3,6 @@ const {client, insertReview} = require('../cassandra.js');
 const {StatusBar} = require('./seed.js');
 const { Transform, Readable, Writable } = require('stream');
 
-
-const startTime = new Date(2000, 01, 01).valueOf();
-const endTime = Date.now();
-const timeDiff = endTime - startTime; // make these toplevel constants to prevent recomputation
-
-/**
- * @return {number} - create a random timestamp between start and end
- */
-const mkRndStamp = () => (Math.random() * timeDiff) + startTime;
-
-const queryStr = `select id from items`;
-
-
 /**
  * 
  * @param {number} max - Maximum expected number of operations
@@ -68,7 +55,7 @@ const addTimeStamp = (id) => {
 }
 
 /**
- * @return {Promise<cassandra.concurrent.ResultSetGroup>} - the result of updating every row in the DB 
+ * @return {Promise<ResultSetGroup>} - the result of updating every row in the DB 
  * 
  * Adds a timestamp to every row in the database (takes a while)
  */
@@ -80,7 +67,7 @@ let insertTimes = async () => {
                 .pipe(timestampConduit)
                 .pipe(loggerConduit(numRows));
     let q = `update items set createdat = ? where id = ?`;
-    cass.concurrent.executeConcurrent(client, q, stream, {concurrencyLevel: 1024});
+    return cass.concurrent.executeConcurrent(client, q, stream, {concurrencyLevel: 1024});
 };
 
 if (require.main === module) {
