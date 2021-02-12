@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components'
-import Axios from 'axios'
+import fetchReviews from '../fetchReviews';
 
 const BackgroundBar = styled.div`
 width: 80%;
@@ -15,8 +15,6 @@ left: 2rem;
  }
 
 `
-
-
 
 const Bar = styled.div`
 width: 92%;
@@ -220,67 +218,28 @@ class Star extends React.Component {
     }
   }
 
-
-
-
   componentDidMount() {
-    Axios('/reviews').then(reviews => {
-       console.log(reviews.data)
+    fetchReviews().then(reviews => {
        this.setState({
-         reviews: reviews.data
+         reviews
        })
     }).then(() => {
-      let star1 = 0;
-      let star2 = 0;
-      let star3 = 0;
-      let star4 = 0;
-      let star5 = 0;
+      let stars = new Array(6).fill(0);
+      let {reviews} = this.state;
 
-
-
-      //
-
-      for (let i = 0; i < this.state.reviews.length; i++) {
-        if (this.state.reviews[i].stars === 1) {
-          star1++;
-        } else if (this.state.reviews[i].stars === 2) {
-          star2++;
-        } else if (this.state.reviews[i].stars === 3) {
-          star3++;
-        } else if (this.state.reviews[i].stars === 4) {
-          star4++;
-        } else if (this.state.reviews[i].stars === 5) {
-          star5++;
-        }
-
-
-      }
+      reviews.forEach(rev => stars[rev.stars]++);
+      let pcts = stars.map(s => s / reviews.length * 100);
 
    // then divide
+      let starAvg = 0;
+      for (let i = 1; i <= 5; i++) {
+        let cur = pcts[i];
+        document.querySelector(`.star${i}_percent`).style.width = `${cur}%`;
+        document.querySelector(`.star_${i}`).innerHTML = `${~~cur}`;
+        starAvg += i * stars[i];
+      }
 
-   let star1Value = (star1 / this.state.reviews.length) * 100
-   let star2Value = (star2 / this.state.reviews.length) * 100
-   let star3Value = (star3 / this.state.reviews.length) * 100
-   let star4Value = (star4 / this.state.reviews.length) * 100
-   let star5Value = (star5 / this.state.reviews.length) * 100
-   console.log(star5Value)
-    document.querySelector('.star5_percent').style.width = `${star5Value}%`
-    document.querySelector('.star4_percent').style.width = `${star4Value}%`
-    document.querySelector('.star3_percent').style.width = `${star3Value}%`
-    document.querySelector('.star2_percent').style.width = `${star2Value}%`
-    document.querySelector('.star1_percent').style.width = `${star1Value}%`
-
-
-
-    document.querySelector('.star_5').innerHTML = `${Math.floor(star5Value)}%`
-    document.querySelector('.star_4').innerHTML = `${Math.floor(star4Value)}%`
-    document.querySelector('.star_3').innerHTML = `${Math.floor(star3Value)}%`
-    document.querySelector('.star_2').innerHTML = `${Math.floor(star2Value)}%`
-    document.querySelector('.star_1').innerHTML = `${Math.floor(star1Value)}%`
-
-    let starAvg = (5 * star5 + 4 * star4 + 3 *star3 + 2 *star2 + 1 * star1) / (star5 + star4 + star3 + star2 + star1)
-
-    document.querySelector('.totalScore').innerHTML = starAvg.toFixed(2) + ' out of 5';
+    document.querySelector('.totalScore').innerHTML = (starAvg / reviews.length).toFixed(2) + ' out of 5';
 
 
      this.setState({

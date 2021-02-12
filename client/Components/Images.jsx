@@ -10,8 +10,6 @@ const ImageFormat = styled.div`
 
 `
 
-
-
 function Images() {
 
   return (
@@ -26,9 +24,4 @@ function Images() {
   )
 
 }
-
-
-
-
-
-export default Images
+export default Images;

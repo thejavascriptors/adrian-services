@@ -1,4 +1,6 @@
-var path = require('path');
+const path = require('path');
+const CompressionPlugin = require('compression-webpack-plugin');
+
 
 
 module.exports = {
@@ -7,15 +9,20 @@ module.exports = {
     filename: 'bundle.js',
     path: `${__dirname}/public`
   },
+  plugins: [
+    new CompressionPlugin(),
+  ],
+  externals: {
+    'react-dom': 'ReactDOM',
+    'react': 'React',
+    'axios': 'axios'
+  },
   module: {
-    loaders: [
+    rules: [
       {
         test: /\.jsx?/,
         include: `${__dirname}/client`,
-        loader: 'babel-loader',
-        query: {
-          presets: ['react', 'es2015']
-        }
+        use: 'babel-loader',
       }
     ]
   }

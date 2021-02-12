@@ -1,0 +1,3 @@
+resources:
+- deployment.yaml
+- pod.yaml
